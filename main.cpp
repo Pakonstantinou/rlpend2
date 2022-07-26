@@ -63,13 +63,13 @@ public:
         bool done = false;
         double reward;
         double temp_velocity = robot->velocities()[0];
-        double theta = angle_dist(temp_pos, M_PI);
-        //reward=-(std::abs(M_PI-robot->positions()[0]));
-        reward = theta;
+        double theta = angle_dist(temp_pos, 0.);
+        // reward=-(std::abs(M_PI-robot->positions()[0]));
+        reward = -theta;
         //reward = -std::abs(temp_velocity);
 
         //if (std::abs(M_PI-temp_pos)<0.0001) {
-        if ((std::abs(M_PI-theta)<0.1)){
+        if ((theta)<0.1){
             //if ((std::abs(theta)<0.1)){
 
             //auto cmds = rd::make_vector({0});
@@ -127,7 +127,7 @@ public:
             theta += 2 * M_PI;
         while (theta > M_PI)
             theta -= 2 * M_PI;
-        return abs(theta);
+        return std::abs(theta);
     }
 };
 
@@ -175,7 +175,7 @@ public:
         torch::Tensor sigma = torch::exp(logsigma).to(torch::kDouble);;
         //std::cout<<logsigma<<sigma<<std::endl;
 
-        std::normal_distribution<float> distribution(mu.item<float>(), sigma.item<float>());
+        //std::normal_distribution<float> distribution(mu.item<float>(), sigma.item<float>());
 
         // auto sampler1 = torch::randn({1}) * sigma + mu ;
         // auto pdf = (1.0 / (sigma * std::sqrt(2.0 * M_PI))) * torch::exp(-0.5 * torch::pow((sampler1 - mu) / sigma, 2));
