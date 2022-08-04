@@ -229,7 +229,7 @@ int main() {
 
     pendulum env;
 
-    Agent *agent = new Agent(0.000005, 0.00001, 3);
+    Agent *agent = new Agent(0.00005, 0.0001, 3);
 
     int num_episodes = 800000;
     bool done;
